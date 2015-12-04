@@ -1,0 +1,21 @@
+<html>
+    <!-- 定义一个宏模板 -->
+    <head>
+    </head>
+    <body>
+        {% if user is defined: %}
+            {% for u in user: %}
+        <p><i>{{ u['id'] }}</i></p>
+        <p><i>{{ u['username'] }}</i></p>
+        <p><i>{{ u['password'] }}</i></p>
+        <p><i>{{ u['company'] }}</i></p>
+        <p><i>{{ u['job'] }}</i></p>
+            {% endfor %}
+        {% else: %}
+        <p>No User is Defined</p>
+        {% endif %}
+        {% if data is defined: %}
+        <p><i>data = {{ data }}</i></p>
+        {% endif %}
+    </body>
+</html>

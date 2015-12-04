@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+
+<!--[if IE 8]> <html lang="zh-cmn-Hans-CN" class="ie8"> <![endif]-->
+
+<!--[if IE 9]> <html lang="zh-cmn-Hans-CN" class="ie9"> <![endif]-->
+
+<!--[if !IE]><!--> <html lang="zh-cmn-Hans-CN"> <!--<![endif]-->
+
+<!-- BEGIN HEAD -->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+        <meta name="description" content="该网站用于执行APK渠道SDK打包操作">
+        <meta name="author" content="zsigui">
+
+        <title>打包后台系统</title>
+
+        <!-- Bootstrap core CSS -->
+        <link href="../static/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Custom styles for this template -->
+        <link href="../static/pack/css/login.css" rel="stylesheet">
+
+        <!-- All bootstrap js plugin depends on jquery plugin, it need to be added first -->
+        <script src="../static/dist/js/jquery.min.js"></script>
+        <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+        <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+        <script src="../static/dist/js/ie-emulation-modes-warning.js"></script>
+
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+        <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <div class="container">
+            <form class="form-signin" action="{{ url_for('login') }}" method="POST">
+                <i class="icon-home"></i><h2 class="form-signin-heading">登录界面</h2>
+                <label class="sr-only" for="inputUsername">username</label>
+                <input class="form-control" id="inputUsername" name="username" type="text" placeholder="用户名" required autofocus />
+                <label class="sr-only" for="inputPassword">Password</label>
+                <input class="form-control" id="inputPassword" name="password" type="password" placeholder="密码" required />
+                <div class="checkbox">
+                    <label>
+                        <input name="remember" type="checkbox" value="remember-me" /> 记住我
+                    </label>
+                </div>
+                <button class="btn btn-lg btn-primary btn-block" name="login" type="submit">登录</button>
+            </form>
+        </div>
+    </body>
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../static/dist/js/ie10-viewport-bug-workaround.js" ></script>
+</html>
