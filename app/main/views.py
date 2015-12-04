@@ -20,7 +20,7 @@ def after_request(response):
                        query.context))
     return response
 
-@main.route('/shutdown')
+@main.route('/shutdown/')
 def sever_shutdown():
     if not current_app.testing:
         abort(404)
@@ -30,23 +30,22 @@ def sever_shutdown():
     shutdown()
     return 'Shutting down ...'
 
-@main.route('/login', methods=['GET', 'POST'])
+@main.route('/login/', methods=['GET', 'POST'])
 def login():
     args = request.args if request.method != 'POST' else request.form
-    flash(u'login()调用')
     if request.method == 'POST':
-        flash(u'执行POST')
         session['pa_user'] = args.get('username', None)
         session['pa_pwd'] = args.get('password', None)
         session['pa_remember'] = args.get('remember', None)
         session['pa_time'] = time.time()
-        redirect(url_for('main.login_confirm', nextp=args.get('nextp', None)))
+        session['nextp'] = args.get('nextp', None)
+        return redirect(url_for('.login_confirm'))
     return render_template('login.html')
 
-@main.route('/login_confirm', methods=['GET'])
-def login_confirm(nextp):
-    if session['pa_user'] is None or session['pa_pwd'] is None\
-            or session['pa_time'] is None:
+@main.route('/login_confirm/', methods=['GET'])
+def login_confirm():
+    if session.get('pa_user') is None or session('pa_pwd') is None\
+            or session.get('pa_time') is None:
         flash(u'提交信息出错，登录失败!')
         utils.clear_session_state(session)
         return render_template('login.html')
@@ -62,12 +61,13 @@ def login_confirm(nextp):
     login_user(session['pa_user'], session['pa_pwd'])
     session['pa_time'] = time.time()
     resp = None
-    if nextp is not None:
-        resp = make_response(redirect(nextp))
+    if session['nextp'] is not None:
+        resp = make_response(redirect(session['nextp']))
+        session.pop('nextp', None)
     else:
         resp = make_response(redirect(url_for('static', filename='index.html')))
 
-    if session['remember'] is not None:
+    if session.get('remember') is not None:
         expire_time = int(session['pa_time'] + 7 * 24 * 60 * 60)
         resp.set_cookie('c_pa_user', session['pa_user'], expires=expire_time)
         resp.set_cookie('c_pa_pwd', session['pa_user'], expires=expire_time)

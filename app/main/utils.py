@@ -8,3 +8,4 @@ def clear_session_state(session):
     session.pop('pa_pwd', None)
     session.pop('pa_remember', None)
     session.pop('pa_time', None)
+    session.pop('nextp', None)
